@@ -32,7 +32,7 @@ public class TestSendMessageController {
     @GetMapping("send1")
     public String send1(String message){
         System.out.println("生产者---------> 发送时间:" + simpleDateFormat.format(new Date()));
-        rabbitTemplate.convertAndSend("ex","hello.k",message);
+        rabbitTemplate.convertAndSend("ex","hello.kk",message);
         return message;
     }
 }

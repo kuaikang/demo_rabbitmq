@@ -33,5 +33,7 @@
         <property name="connectionFactory" ref="connectionFactory"/>
         <property name="prefetchCount" value="20"/>
         <property name="concurrentConsumers" value="8"/>
+        <!--消息确认模式：NONE.自动确认 AUTO.根据情况确认 MANUAL.手动确认-->
+        <property name="acknowledgeMode" value="MANUAL"/>
     </bean>
 </beans>
