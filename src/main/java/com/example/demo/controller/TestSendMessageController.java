@@ -7,7 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Author: kuaik
@@ -34,5 +37,10 @@ public class TestSendMessageController {
         System.out.println("生产者---------> 发送时间:" + simpleDateFormat.format(new Date()));
         rabbitTemplate.convertAndSend("ex","hello.kk",message);
         return message;
+    }
+
+    public static void main(String[] args) {
+        HashMap<String,String> map = new HashMap<>();
+        Map<String, String> stringStringMap = Collections.synchronizedMap(map);
     }
 }
