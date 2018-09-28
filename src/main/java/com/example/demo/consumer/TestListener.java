@@ -20,6 +20,11 @@ public class TestListener {
 
     @RabbitHandler
     public void handler(String message) {
-        System.out.println("内容：" + message + ",时间：" + simpleDateFormat.format(new Date()));
+        System.out.println();
+        for (int i = 0; i < 1000; i++) {
+            System.out.print("1");
+        }
+        System.out.println();
+        System.out.println("消费者------------->内容：" + message + ",时间：" + simpleDateFormat.format(new Date()));
     }
 }

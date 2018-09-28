@@ -9,7 +9,7 @@
 
     <!--Creates a rabbit CachingConnectionFactory with sensible defaults.以默认的方式创建连接工厂(带有session缓存)-->
     <rabbit:connection-factory id="connectionFactory" host="${rabbitmq.host}" virtual-host="${rabbitmq.virtual-host}"
-        port="${rabbitmq.port}" username="${rabbitmq.username}" password="${rabbitmq.password}"/>
+        port="${rabbitmq.port}" username="${rabbitmq.username}" password="${rabbitmq.password}" publisher-confirms="${rabbitmq.publisher-confirms}"/>
 
 
     <!--Creates a rabbit template for convenient access to the broker. broker:代理服务器,接收和分发消息的应用-->

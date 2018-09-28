@@ -24,7 +24,14 @@ public class TestSendMessageController {
 
     @GetMapping("send")
     public String send(String message){
-        System.out.println("发送时间:" + simpleDateFormat.format(new Date()));
+        System.out.println("生产者---------> 发送时间:" + simpleDateFormat.format(new Date()));
+        rabbitTemplate.convertAndSend("ex","hello.k",message);
+        return message;
+    }
+
+    @GetMapping("send1")
+    public String send1(String message){
+        System.out.println("生产者---------> 发送时间:" + simpleDateFormat.format(new Date()));
         rabbitTemplate.convertAndSend("ex","hello.k",message);
         return message;
     }
