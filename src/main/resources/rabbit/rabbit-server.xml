@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/rabbit
+           http://www.springframework.org/schema/rabbit/spring-rabbit.xsd
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--Creates a rabbit CachingConnectionFactory with sensible defaults.以默认的方式创建连接工厂(带有session缓存)-->
+    <rabbit:connection-factory id="connectionFactory" host="${rabbitmq.host}" virtual-host="${rabbitmq.virtual-host}"
+        port="${rabbitmq.port}" username="${rabbitmq.username}" password="${rabbitmq.password}"/>
+
+
+    <!--Creates a rabbit template for convenient access to the broker. broker:代理服务器,接收和分发消息的应用-->
+    <rabbit:template id="rabbitTemplate" connection-factory="connectionFactory"/>
+
+    <!--Creates a rabbit admin used to manage exchanges, queues and bindings.-->
+    <rabbit:admin connection-factory="connectionFactory"/>
+
+    <!--Creates a queue for consumers to retrieve messages.  Uses an existing queue
+        with the same name if it exists on the broker, or else declares a
+        new one.  If you want to send a message use an exchange.-->
+    <rabbit:queue name="hello" auto-declare="true"/>
+
+    <rabbit:topic-exchange name="ex" auto-declare="true">
+        <rabbit:bindings>
+            <rabbit:binding pattern="hello.k" queue="hello"></rabbit:binding>
+        </rabbit:bindings>
+    </rabbit:topic-exchange>
+
+    <bean id="containerFactory"  class="org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="prefetchCount" value="20"/>
+        <property name="concurrentConsumers" value="8"/>
+    </bean>
+</beans>
