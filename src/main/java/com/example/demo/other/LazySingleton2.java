@@ -9,7 +9,7 @@ public class LazySingleton2 {
     private LazySingleton2() {
     }
 
-    private static LazySingleton2 instance = null;
+    private static volatile LazySingleton2 instance = null;
 
     public static LazySingleton2 getInstance() {
         if (null == instance) {
